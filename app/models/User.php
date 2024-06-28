@@ -38,6 +38,7 @@ class User {
       $this->log_attempt($username, 'good');
       $_SESSION['auth'] = 1;
       $_SESSION['username'] = ucwords($username);
+      $_SESSION['user_id'] = $rows['user_id'];
       unset($_SESSION['failedAuth']);
       header('Location: /home');
       die;
@@ -94,7 +95,7 @@ class User {
     $last_attempt_time = $attempts[0];
     $current_time = date('h:i:s', time());
 
-    $diff = abs($timestamp2 - $timestamp1);
+    $diff = abs($current_time - $last_attempt_time);
 
     if (!isset($_SESSION["failed_login"])) {
       $_SESSION["failed_login"] = 1;
