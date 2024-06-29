@@ -31,6 +31,8 @@ class Reminder {
     $statement->bindValue(':id', $id);
     $statement->bindValue(':subject', $subject);
     $statement->execute();
+    header('Location: /reminders');
+    die;
   }
 
   public function delete_reminder ($id) {
@@ -38,6 +40,8 @@ class Reminder {
     $statement = $db->prepare("delete from reminders where id = :id;");
     $statement->bindValue(':id', $id);
     $statement->execute();
+    header('Location: /reminders');
+    die;
   }
 
 }

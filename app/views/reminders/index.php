@@ -8,21 +8,28 @@
         </div>
     </div>
     
-    <p>Create a new reminder</p>
     <form action="/reminders/create" method="post" >
         <div class="form-group">
-            <label for="subject">Subject</label>
-            <input required type="text" class="form-control" name="subject">
+            <label for="subject">Create a reminder:</label>
+            <input required type="text" class="form-control" name="subject" placeholder="Enter subject">
         </div>
         <br>
         <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
     </form>
-
-    <?php
-        foreach ($data['reminders'] as $reminder) {
-            echo "<p>" . $reminder['subject'] . ' <a href="/reminders/update">update</a> <a href="/reminders/delete">delete</a> ' . "</p>";
-        }
-
-    ?>
+    <br>
+    <div class="card-group">
+        <?php
+            foreach ($data['reminders'] as $reminder) { ?>
+                <div class="card text-bg-primary p-2" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title"><? echo $reminder['subject'] ?></h5>
+                    <a href="/reminders/update/?id=<? echo $reminder['id'];?>" class="card-link">Update</a>
+                    <a href="/reminders/delete/?id=<? echo $reminder['id'];?>" class="card-link">Delete</a>
+                  </div>
+                </div>
+            <?
+            }
+        ?>
+    </div>
     
     <?php require_once 'app/views/templates/footer.php' ?>

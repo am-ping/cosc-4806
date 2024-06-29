@@ -16,13 +16,15 @@ class Reminders extends Controller {
   }
 
   public function update() {
+    $id = $_GET['id'];
     $reminder = $this->model('Reminder');
-    $this->view('reminders/update');
+    $reminder->update_reminder($id, $subject);
   }
 
   public function delete() {
+    $id = $_GET['id'];
     $reminder = $this->model('Reminder');
-    $this->view('reminders/delete');
+    $reminder->delete_reminder($id);
   }
 
 }
