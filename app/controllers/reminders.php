@@ -10,13 +10,13 @@ class Reminders extends Controller {
 
   public function create() {
     $subject = $_REQUEST['subject'];
-    
     $reminder = $this->model('Reminder');
     $reminder->create_reminder($subject);
   }
 
   public function update() {
     $id = $_GET['id'];
+    $subject = $_REQUEST['new_subject'];
     $reminder = $this->model('Reminder');
     $reminder->update_reminder($id, $subject);
   }

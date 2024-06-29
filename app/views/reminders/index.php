@@ -17,15 +17,22 @@
         <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
     </form>
     <br>
-    <div class="card-group">
+    <div class="d-flex flex-wrap justify-content-start gap-3 text-bg-primary">
         <?php
             foreach ($data['reminders'] as $reminder) { ?>
-                <div class="card text-bg-primary p-2" style="width: 18rem;">
-                  <div class="card-body">
-                    <h5 class="card-title"><? echo $reminder['subject'] ?></h5>
-                    <a href="/reminders/update/?id=<? echo $reminder['id'];?>" class="card-link">Update</a>
-                    <a href="/reminders/delete/?id=<? echo $reminder['id'];?>" class="card-link">Delete</a>
-                  </div>
+                <div class="card text-bg-primary p-1" style="width: 18rem;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title"><? echo $reminder['subject'] ?></h5>
+                            <a class="link-danger link-offset-3 link-underline link-underline-opacity-0" href="/reminders/delete/?id=<? echo $reminder['id'];?>" class="card-link">X</a>
+                        </div>
+                        <form action="/reminders/update/?id=<? echo $reminder['id'];?>" method="post" >
+                            <div class="form-group">
+                                <input required type="text" class="form-control" name="new_subject" placeholder="Enter new subject">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Update</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             <?
             }
