@@ -10,7 +10,7 @@
 
 <div class="row mx-auto" style="width: 300px;">
     <div class="col-sm-auto mx-auto border border-primary rounded p-4" style="width: 300px;">
-        <form action="/create/verify" method="post" >
+        <form action="/signup/verify" method="post" >
             <fieldset>
                 <div class="form-group">
                     <label for="username">Username</label>

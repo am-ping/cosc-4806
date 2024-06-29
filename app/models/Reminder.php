@@ -14,9 +14,30 @@ class Reminder {
     return $rows;
   }
 
-  public function update_reminder ($reminder_id) {
+  public function create_reminder ($subject) {
     $db = db_connect();
-    //do update statement
+    $statement = $db->prepare("insert into reminders (user_id, subject) values (:user_id, :subject);");
+    $statement->bindParam(':user_id', $_SESSION["user_id"]);
+    $statement->bindParam(':subject', $subject);
+    $statement->execute();
+
+    header('Location: /reminders');
+    die;
+  }
+
+  public function update_reminder ($id, $subject) {
+    $db = db_connect();
+    $statement = $db->prepare("update reminders set subject = :subject where id = :id;");
+    $statement->bindValue(':id', $id);
+    $statement->bindValue(':subject', $subject);
+    $statement->execute();
+  }
+
+  public function delete_reminder ($id) {
+    $db = db_connect();
+    $statement = $db->prepare("delete from reminders where id = :id;");
+    $statement->bindValue(':id', $id);
+    $statement->execute();
   }
 
 }

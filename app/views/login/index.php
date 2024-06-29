@@ -29,7 +29,7 @@
 		<?php elseif (isset($_GET['error']) && $_GET['error'] == 'failed'): ?>
 			<p class="text-center text-danger">Login failed. Please try again.</p>
 		<?php endif; ?>
-		<p class="text-center">Don't have an account? <a href='/create'>Sign up</a></p>
+		<p class="text-center">Don't have an account? <a href='/signup'>Sign up</a></p>
 		<?php
 		if (isset($_SESSION["failed_login"])) {
 			echo '<p class="text-center text-danger">';
