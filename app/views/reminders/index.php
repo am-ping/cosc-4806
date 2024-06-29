@@ -10,7 +10,7 @@
     
     <form action="/reminders/create" method="post" >
         <div class="form-group">
-            <label for="subject">Create a reminder:</label>
+            <label for="subject">Create a new reminder:</label>
             <input required type="text" class="form-control" name="subject" placeholder="Enter subject">
         </div>
         <br>
@@ -28,7 +28,7 @@
                         </div>
                         <form action="/reminders/update/?id=<? echo $reminder['id'];?>" method="post" >
                             <div class="form-group">
-                                <input required type="text" class="form-control" name="new_subject" placeholder="Enter new subject">
+                                <input required type="text" class="form-control" name="new_subject" placeholder="New subject">
                                 <button type="submit" class="btn btn-primary" style="width: 100%;">Update</button>
                             </div>
                         </form>
