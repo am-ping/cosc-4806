@@ -30,8 +30,10 @@ class User {
     $statement->execute();
     $rows = $statement->fetch(PDO::FETCH_ASSOC);
 
-    if ($this->is_locked_out($username)) {
-        echo "<p class='text-center text-danger'>You are locked out. Please try again after 60 seconds.</p>";
+    if (!isset($_SESSION["failed_login"])) {
+      $_SESSION["failed_login"] = 1;
+    } else {
+      $_SESSION["failed_login"] += 1;
     }
   
     if (password_verify($password, $rows['password'])) {
@@ -39,13 +41,16 @@ class User {
       $_SESSION['auth'] = 1;
       $_SESSION['username'] = ucwords($username);
       $_SESSION['user_id'] = $rows['id'];
+      if ($_SESSION['username'] == 'Admin') {
+        $_SESSION['is_admin'] = true;
+      }
       unset($_SESSION['failedAuth']);
       header('Location: /home');
       die;
     } else {
       $this->log_attempt($username, 'bad');
       if(isset($_SESSION['failedAuth'])) {
-        $_SESSION['failedAuth'] ++; //increment
+        $_SESSION['failedAuth']++;
       } else {
         $_SESSION['failedAuth'] = 1;
       }
@@ -79,29 +84,8 @@ class User {
     $statement->bindValue(':username', $username);
     $statement->bindValue(':attempt', $attempt);
     date_default_timezone_set('Canada/Eastern');
-    $time = date('h:i:s', time());
+    $time = date('m/d/Y h:i:s a', time());
     $statement->bindValue(':time', $time);
     $statement->execute();
-  }
-
-  public function is_locked_out($username) {
-    $db = db_connect();
-    $statement = $db->prepare("SELECT time FROM attempts_log WHERE username = :username AND attempt = 'bad' ORDER BY id DESC LIMIT 3;");
-    $statement->bindValue(':username', $username);
-    $statement->execute();
-    $attempts = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
-    date_default_timezone_set('Canada/Eastern');
-    $last_attempt_time = $attempts[0];
-    $current_time = date('h:i:s', time());
-
-    $diff = abs($current_time - $last_attempt_time);
-
-    if (!isset($_SESSION["failed_login"])) {
-      $_SESSION["failed_login"] = 1;
-    } else {
-      $_SESSION["failed_login"] += 1;
-    }
-      
   }
 }

@@ -6,7 +6,7 @@ if (!isset($_SESSION['auth'])) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" href="/favicon.png">
     <title>COSC 4806</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,7 +15,7 @@ if (!isset($_SESSION['auth'])) {
     <meta name="mobile-web-app-capable" content="yes">
   </head>
   <body>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-success mb-3">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">COSC 4806</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,12 +24,23 @@ if (!isset($_SESSION['auth'])) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/home">Home</a>
+              <a class="nav-link text-bg-success" aria-current="page" href="/home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/reminders">Reminders</a>
+              <a class="nav-link text-bg-success" href="/reminders">Reminders</a>
             </li>
+            <?php
+            if (isset($_SESSION["is_admin"])) {
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link text-bg-success" href="/reports">Reports</a>';
+              echo '</li>';
+            }
+            ?>
           </ul>
+          <?php
+          echo "<div class='mb-0 text-bg-success me-2'>" . $_SESSION['username'] . "</div>";
+          echo "<a class='btn btn-info' href='/logout' type='button'>Logout</a>";
+          ?>
         </div>
       </div>
     </nav>
