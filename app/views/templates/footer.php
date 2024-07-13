@@ -1,4 +1,4 @@
-<footer class="footer fixed-bottom text-bg-success mx-auto text-center p-3 pb-0" style="width: 100%;"">    
+<footer class="footer text-bg-success mx-auto text-center p-3 pb-0" style="width: 100%;"">    
     <div class="row">
         <div class="col-lg-12">
             <p>Copyright &copy; <?php echo date('Y'); ?> | Arbaaz Mirza </p>

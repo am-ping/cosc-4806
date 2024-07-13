@@ -1,52 +1,47 @@
 <?php require_once 'app/views/templates/header.php' ?>
 <div class="container">
-<div class="page-header" id="banner">
-    <div class="row">
-        <div class="col-lg-12">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?= ucwords($_SESSION['controller']);?></li>
-              </ol>
-            </nav>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h1>Reminders</h1>
-        </div>
-    </div>
-</div>
-
-<form action="/reminders/create" method="post" >
-    <div class="form-group">
-        <label for="subject">Create a new reminder:</label>
-        <input required type="text" class="form-control" name="subject" placeholder="Enter subject">
-    </div>
-    <br>
-    <button type="submit" class="btn btn-success" id="liveToastBtn" style="width: 100%;">Submit</button>
-</form>
-<br>
-<div class="d-flex flex-wrap justify-content-start gap-3">
-    <?php
-    foreach ($data['reminders'] as $reminder) { ?>
-        <div class="card text-bg-success p-1" style="width: 19.5rem;">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h5 class="card-title"><? echo $reminder['subject'] ?></h5>
-                    <a class="btn-close" aria-label="Close" href="/reminders/delete/?id=<? echo $reminder['id'];?>"></a>
-                </div>
-                <form action="/reminders/update/?id=<? echo $reminder['id'];?>" method="post" >
-                    <div class="form-group">
-                        <input required type="text" class="form-control" name="new_subject" placeholder="New subject">
-                        <button type="submit" class="btn btn-success" style="width: 100%;">Update</button>
-                    </div>
-                </form>
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-12">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= ucwords($_SESSION['controller']);?></li>
+                  </ol>
+                </nav>
             </div>
         </div>
-    <?
-    }
-    ?>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Reports</h1>
+            </div>
+        </div>
+    </div>
+    <h2>User with the most reminders: </h2>
+    <h2>All Reminders</h2>
+    <table class="table table-success table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-bg-success">ID</th>
+                <th scope="col" class="text-bg-success">User</th>
+                <th scope="col" class="text-bg-success">Reminder</th>
+                <th scope="col" class="text-bg-success">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($data['reminders'] as $reminder) { ?>
+            <tr>
+                <th scope="row"><? echo $reminder['user_id'] ?></th>
+                <td><? echo $reminder['username'] ?></td>
+                <td><? echo $reminder['subject'] ?></td>
+                <td><? echo $reminder['created_at'] ?></td>
+            </tr>
+        <?
+        }
+        ?>
+        </tbody>
+    </table>
 </div>
 
 <?php require_once 'app/views/templates/footer.php' ?>
