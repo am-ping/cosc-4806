@@ -1,7 +1,7 @@
-<footer class="footer fixed-bottom mx-auto text-center" style="width: 200px;"">    
+<footer class="footer fixed-bottom text-bg-success mx-auto text-center p-3 pb-0" style="width: 100%;"">    
     <div class="row">
         <div class="col-lg-12">
-            <p>Copyright &copy; <?php echo date('Y'); ?> </p>
+            <p>Copyright &copy; <?php echo date('Y'); ?> | Arbaaz Mirza </p>
         </div>
     </div>
 </footer>

@@ -9,35 +9,29 @@
     </div>
 
 <div class="row mx-auto" style="width: 300px;">
-  <div class="col-sm-auto mx-auto border border-primary rounded p-4" style="width: 300px;">
+  <div class="shadow col-sm-auto mx-auto border border-success rounded p-4 mb-3 mt-3" style="width: 300px;">
 		<form action="/login/verify" method="post" >
 			<fieldset>
-				<div class="form-group">
+				<div class="form-group mb-2 border-success">
 					<label for="username">Username</label>
-					<input required type="text" class="form-control" name="username">
+					<input required type="text" class="form-control border-success"" name="username">
 				</div>
-				<div class="form-group">
+				<div class="form-group mb-3 border-success">
 					<label for="password">Password</label>
-					<input required type="password" class="form-control" name="password" >
+					<input required type="password" class="form-control border-success"" name="password" >
 				</div>
-	      <br>
-			  <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+			  <button type="submit" class="btn btn-success border border-white mb-1" style="width: 100%;">Login</button>
 			</fieldset>
 		</form>
-		<?php if (isset($_GET['error']) && $_GET['error'] == 'locked_out'): ?>
-			<p class="text-center text-danger">You are locked out. Please try again after 60 seconds.</p>
-		<?php elseif (isset($_GET['error']) && $_GET['error'] == 'failed'): ?>
-			<p class="text-center text-danger">Login failed. Please try again.</p>
-		<?php endif; ?>
-		<p class="text-center">Don't have an account? <a href='/signup'>Sign up</a></p>
-		<?php
-		if (isset($_SESSION["failed_login"])) {
-			echo '<p class="text-center text-danger">';
-			echo "Fail attempt number: " . $_SESSION["failed_login"];
-			echo '</p>';
-		}
-		?>
+		<p class="text-center mb-0">Don't have an account? <a href='/signup'>Sign up</a></p>
 	</div>
+	<?php
+	if (isset($_SESSION["failed_login"])) {
+		echo '<div class="alert alert-danger" role="alert">';
+		echo "Fail attempt number: " . $_SESSION["failed_login"];
+		echo '</div>';
+	}
+	?>
 </div>
 
 <?php require_once 'app/views/templates/footer.php' ?>
