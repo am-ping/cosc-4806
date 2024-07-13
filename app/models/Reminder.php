@@ -21,6 +21,14 @@ class Reminder {
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
   }
+  
+  public function total_logins () {
+    $db = db_connect();
+    $statement = $db->prepare("SELECT username, COUNT(*) AS total_logins FROM attempts_log WHERE attempt = 'good' GROUP BY username ORDER BY total_logins DESC;");
+    $statement->execute();
+    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+  }
 
   public function get_reminders () {
     $db = db_connect();

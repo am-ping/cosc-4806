@@ -17,8 +17,8 @@
             </div>
         </div>
     </div>
-    <h2>User with the most reminders: </h2>
-    <h2>All Reminders</h2>
+    <h2 class="text-center text-bg-success rounded p-2">User with the most reminders: <? echo $data['most_reminders_user'][0]['username']; ?></h2>
+    <h2 class="text-center">All Reminders</h2>
     <table class="table table-success table-striped table-bordered">
         <thead>
             <tr>
@@ -29,19 +29,40 @@
             </tr>
         </thead>
         <tbody>
-        <?php
-        foreach ($data['reminders'] as $reminder) { ?>
-            <tr>
-                <th scope="row"><? echo $reminder['user_id'] ?></th>
-                <td><? echo $reminder['username'] ?></td>
-                <td><? echo $reminder['subject'] ?></td>
-                <td><? echo $reminder['created_at'] ?></td>
-            </tr>
-        <?
-        }
-        ?>
+            <?php
+            foreach ($data['reminders'] as $reminder) { ?>
+                <tr>
+                    <th scope="row"><? echo $reminder['user_id'] ?></th>
+                    <td><? echo $reminder['username'] ?></td>
+                    <td><? echo $reminder['subject'] ?></td>
+                    <td><? echo $reminder['created_at'] ?></td>
+                </tr>
+            <?
+            }
+            ?>
         </tbody>
     </table>
+    <h2 class="text-center">Total Logins by Username</h2>
+    <table class="table table-success table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-bg-success">Username</th>
+                <th scope="col" class="text-bg-success">Total Logins</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($data['total_logins'] as $login) { ?>
+                <tr>
+                    <td><? echo $login['username']; ?></td>
+                    <td><? echo $login['total_logins']; ?></td>
+                </tr>
+            <?
+            }
+            ?>
+        </tbody>
+    </table>
+    </div>
 </div>
 
 <?php require_once 'app/views/templates/footer.php' ?>
