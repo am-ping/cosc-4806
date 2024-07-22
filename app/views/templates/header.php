@@ -22,9 +22,6 @@
               <a class="nav-link text-bg-success" aria-current="page" href="/home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-bg-success" href="/movie">Movies</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link text-bg-success" href="/reminders">Reminders</a>
             </li>
             <?php
@@ -35,10 +32,14 @@
             }
             ?>
           </ul>
+          <form action="movie/search" class="d-flex" method="post" role="search">
+            <input required class="form-control rounded-0 rounded-start" type="text" placeholder="Enter Movie Name..." aria-label="Search" name="movie">
+            <button class="btn btn-info rounded-0 rounded-end me-4" type="submit">Search</button>
+          </form>
           <?php 
           if (isset($_SESSION["auth"])) {
-            echo "<div class='mb-0 text-bg-success me-2'>" . $_SESSION['username'] . "</div>";
-            echo "<a class='btn btn-info' href='/logout' type='button'>Logout</a>";
+            echo "<div class='mb-0 text-bg-success rounded-start rounded-0 p-1 p-2'>" . $_SESSION['username'] . "</div>";
+            echo "<a class='btn btn-info rounded-end rounded-0 border border-info' href='/logout' type='button'>Logout</a>";
           } else  {
             echo "<a class='btn btn-info rounded-start rounded-0 border-end' href='/login' type='button'>Login</a>";
             echo "<a class='btn btn-info rounded-end rounded-0' href='/signup' type='button'>Sign Up</a>";

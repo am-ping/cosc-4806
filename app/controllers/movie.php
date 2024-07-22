@@ -2,8 +2,8 @@
 
 class Movie extends Controller {
 
-    public function index() {		
-      $this->view('movie/index');
+    public function index($movie = null) {		
+      $this->view('movie/index', ['movie' => $movie]);
     }
 
     public function search(){
@@ -11,16 +11,11 @@ class Movie extends Controller {
         // redirect to movie
       }
 
-      $api = $this->model('Api');
-
       $movie_title = $_REQUEST['movie'];
+      $api = $this->model('Api');
       $movie = $api->search_movie($movie_title);
 
-      echo "<pre>";
-      print_r($movie);
-      die;
-
-      $this->view('movie/results', ['movie' => $movie]);
+      $this->index($movie);
 
     }
 
