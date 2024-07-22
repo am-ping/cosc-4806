@@ -32,7 +32,7 @@
             }
             ?>
           </ul>
-          <form action="movie/search" class="d-flex" method="post" role="search">
+          <form action="/movie/search" class="d-flex" method="post" role="search">
             <input required class="form-control rounded-0 rounded-start" type="text" placeholder="Enter Movie Name..." aria-label="Search" name="movie">
             <button class="btn btn-info rounded-0 rounded-end me-4" type="submit">Search</button>
           </form>
