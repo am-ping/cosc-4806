@@ -6,9 +6,9 @@
                 <?php echo "<h1>Movie Search</h1>" ?>
             </div>
             <?php if ($data['movie']['Response'] != "False") { ?>
-                <div class="card mb-5 p-0">
-                  <div class="row g-0">
-                    <div class="col-md-4 p-3 pe-0">
+                <div class="card mb-5 p-4">
+                    <div class="row g-0">
+                        <div class="col-md-4">
                         <img src="<? echo $data['movie']['Poster'] ?>" class="img-fluid pb-1" alt="Poster">
                         <p class="card-text mb-1"><strong>Year: </strong><?php echo $data['movie']['Year']; ?></p>
                         <p class="card-text mb-1"><strong>Rated: </strong><?php echo $data['movie']['Rated']; ?></p>
@@ -16,8 +16,8 @@
                         <p class="card-text mb-1"><strong>Runtime: </strong><?php echo $data['movie']['Runtime']; ?></p>
                         <p class="card-text mb-1"><strong>Genre: </strong><?php echo $data['movie']['Genre']; ?></p>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
+                        <div class="col-md-8">
+                            <div class="card-body pt-0">
                             <h2 class="card-title"><?php echo $data['movie']['Title']; ?></h2>
                             <p class="card-text"><strong>Director: </strong><?php echo $data['movie']['Director']; ?></p>
                             <p class="card-text"><strong>Writer: </strong><?php echo $data['movie']['Writer']; ?></p>
@@ -30,7 +30,7 @@
                             <p class="card-text"><strong>IMDB Rating: </strong><?php echo $data['movie']['imdbRating']; ?>/10 based on <? echo $data['movie']['imdbVotes']; ?> votes</p>
                             <?php if (isset($_SESSION["auth"])) { ?>
                                 <div class="user-rating">
-                                    <strong>Your Rating: </strong>
+                                    <strong>User Rating: </strong>
                                     <br>
                                     <div class="btn-group">
                                         <?php for ($i = 1; $i <= 5; $i++): ?>
@@ -43,7 +43,7 @@
                                 </div>
                             <? } else { ?>
                                <div class="user-rating-disabled">
-                                   <strong>Your Rating: </strong>
+                                   <strong>User Rating: </strong>
                                    <div class="stars">
                                         <?php for ($i = 1; $i <= 5; $i++): ?>
                                             <i class="bi bi-star"></i>
@@ -57,7 +57,15 @@
                             <? } ?>
                         </div>
                     </div>
-                  </div>
+                    </div>
+                    <div class="row g-0">
+                        <h2 class="card-title">Reviews:</h2>
+                        <?php if ($data['api_response']): ?>
+                            <pre><?= print_r($data['api_response'], true) ?></pre>
+                        <?php else: ?>
+                            <p>No content generated.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php } else {
                 echo '<div class="alert alert-danger" role="alert">';

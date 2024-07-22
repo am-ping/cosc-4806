@@ -14,6 +14,18 @@ class Api {
     $title = $movie['Title'];
     return $movie;
   }
+
+  public function save_rating($user_id, $movie_title, $rating) {
+    $db = db_connect();
+    $statement = $db->prepare("INSERT INTO ratings (user_id, movie_title, rating) VALUES (:user_id, :movie_title, :rating)");
+    $statement->bindValue(':user_id',  $_SESSION["user_id"]);
+    $statement->bindValue(':movie_title',  $_SESSION["user_id"]);
+    $statement->bindValue(':rating', $rating);
+    $statement->execute();
+
+    header('Location: /reminders');
+    die;
+  }
   
 }
 
