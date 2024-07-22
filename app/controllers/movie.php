@@ -2,11 +2,10 @@
 
 class Movie extends Controller {
 
-    public function index($movie = null, $api_response = null) {		
+    public function index($movie, $api_response) {		
       $this->view('movie/index', ['movie' => $movie, 'api_response' => $api_response]);
       
     }
-  
 
     public function search(){
 
@@ -50,22 +49,17 @@ class Movie extends Controller {
       $rating = $_REQUEST['rating'];
       $reminder = $this->model('Reminder');
       $reminder->create_reminder($rating);
-        if (isset($_POST['user_id'], $_POST['movie_title'], $_POST['rating'])) {
-            $user_id = $_POST['user_id'];
-            $movie_title = $_POST['movie_title'];
-            $rating = $_POST['rating'];
+      if (isset($_POST['user_id'], $_POST['movie_title'], $_POST['rating'])) {
+        $user_id = $_POST['user_id'];
+        $movie_title = $_POST['movie_title'];
+        $rating = $_POST['rating'];
 
-            $api = $this->model('Api');
-            $result = $api->save_rating($user_id, $movie_title, $rating);
+        $api = $this->model('Api');
+        $result = $api->save_rating($user_id, $movie_title, $rating);
 
-            if ($result) {
-                echo json_encode(['status' => 'success']);
-            } else {
-                echo json_encode(['status' => 'error']);
-            }
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid data']);
-        }
+        echo json_encode(['status' => 'success']);
+  
+      }
     }
 
 }

@@ -59,7 +59,7 @@
                     </div>
                     </div>
                     <div class="row g-0">
-                        <h2 class="card-title">Reviews:</h2>
+                        <h2 class="card-title">Review:</h2>
                         <?php if ($data['api_response']): ?>
                             <pre><?= print_r($data['api_response'], true) ?></pre>
                         <?php else: ?>
